@@ -36,5 +36,7 @@ namespace Bloggie.web.Controllers
             bloggieDbContext.SaveChanges();
             return View("Add");
         }
+
+
     }
 }
