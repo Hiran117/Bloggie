@@ -24,9 +24,9 @@ namespace Bloggie.web.Repositories
 			throw new NotImplementedException();
 		}
 
-		public Task<IEnumerable<BlogPost>> GetAllAsync()
+		public async Task<IEnumerable<BlogPost>> GetAllAsync()
 		{
-			throw new NotImplementedException();
+			return await bloggieDbContext.BlogPosts.ToListAsync();
 		}
 
 		public Task<BlogPost?> GetAsync(Guid id)
