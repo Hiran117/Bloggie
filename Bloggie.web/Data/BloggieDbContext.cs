@@ -9,7 +9,7 @@ namespace Bloggie.web.Data
         {
         }
         //create tables using entity frame work core
-        public DbSet<BlogPost> blogPosts { get; set; }
+        public DbSet<BlogPost> BlogPosts { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<BlogPostLike> BlogPostLike { get; set; }
         public DbSet<BlogPostComment> BlogPostComment { get; set; }

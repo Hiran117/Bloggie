@@ -20,24 +20,31 @@ namespace Bloggie.web.Repositories
 			return blogPost;
 		}
 
-		public Task<BlogPost?> DeleteAsync(Guid id)
+		public async Task<BlogPost?> DeleteAsync(Guid id)
 		{
-			throw new NotImplementedException();
+			var existingBlog = await bloggieDbContext.BlogPosts.FindAsync(id);
+			if (existingBlog != null)
+			{
+				bloggieDbContext.BlogPosts.Remove(existingBlog);
+				await bloggieDbContext.SaveChangesAsync();
+				return existingBlog;
+			}
+			return null;
 		}
 
 		public async Task<IEnumerable<BlogPost>> GetAllAsync()
 		{
-            return await bloggieDbContext.blogPosts.Include(x => x.Tags).ToListAsync();
+            return await bloggieDbContext.BlogPosts.Include(x => x.Tags).ToListAsync();
         }
 
 		public async Task<BlogPost?> GetAsync(Guid id)
 		{
-			return await bloggieDbContext.blogPosts.Include(x => x.Tags).FirstOrDefaultAsync(x => x.Id == id);
+			return await bloggieDbContext.BlogPosts.Include(x => x.Tags).FirstOrDefaultAsync(x => x.Id == id);
 		}
 
         public async Task<BlogPost?> UpdateAsync(BlogPost blogPost)
         {
-            var existingBlog = await bloggieDbContext.blogPosts.Include(x => x.Tags)
+            var existingBlog = await bloggieDbContext.BlogPosts.Include(x => x.Tags)
                 .FirstOrDefaultAsync(x => x.Id == blogPost.Id);
 
             if (existingBlog != null)
