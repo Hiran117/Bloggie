@@ -78,5 +78,7 @@ namespace Bloggie.web.Controllers
 			return View(blogPosts);
 		}
 
+
+
 	}
 }
